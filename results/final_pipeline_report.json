@@ -1,0 +1,50 @@
+{
+  "pipeline_execution": {
+    "timestamp": "2025-09-07T00:05:00.355018",
+    "data_directory": "C:\\projects\\hadapsar-poi-viirs-analysis\\data",
+    "output_directory": "C:\\projects\\hadapsar-poi-viirs-analysis\\results",
+    "status": "completed"
+  },
+  "data_summary": {
+    "total_pois": 80,
+    "categories": 4,
+    "luminosity_range": {
+      "min": 31.63275422986475,
+      "max": 56.32616257857221,
+      "mean": 41.785735495468046
+    }
+  },
+  "analysis_results": {
+    "correlation_analysis": true,
+    "spatial_analysis": true,
+    "cluster_analysis": true,
+    "anomaly_analysis": true
+  },
+  "visualization_outputs": {
+    "comprehensive_map": "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_comprehensive_map.html",
+    "category_maps": [
+      "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_commercial_map.html",
+      "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_essential_services_map.html",
+      "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_education_map.html",
+      "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_recreation_map.html"
+    ],
+    "temporal_map": "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\maps\\hadapsar_temporal_comparison.html",
+    "dashboards": {
+      "overview": "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\dashboards\\overview_dashboard.html",
+      "spatial": "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\dashboards\\spatial_analysis_dashboard.html",
+      "correlation": "C:\\projects\\hadapsar-poi-viirs-analysis\\results\\dashboards\\correlation_dashboard.html"
+    }
+  },
+  "key_findings": {
+    "strongest_correlation": "See detailed analysis report",
+    "cluster_quality": "moderate",
+    "anomaly_rate": "See detailed analysis report",
+    "spatial_pattern": "positive"
+  },
+  "recommendations": [
+    "Review interactive maps for spatial patterns",
+    "Examine dashboards for detailed analysis",
+    "Investigate identified anomalies for planning insights",
+    "Use findings for urban development decisions"
+  ]
+}

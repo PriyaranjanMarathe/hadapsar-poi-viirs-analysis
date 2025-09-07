@@ -1,0 +1,141 @@
+{
+  "descriptive_stats": {
+    "total_pois": 80,
+    "unique_categories": 4,
+    "luminosity_stats": {
+      "count": 80.0,
+      "mean": 41.785735495468046,
+      "std": 6.043035185144088,
+      "min": 31.63275422986475,
+      "25%": 39.53869281303645,
+      "50%": 41.198071529783974,
+      "75%": 45.38000243110875,
+      "max": 56.32616257857221
+    },
+    "category_distribution": {
+      "Commercial": 30,
+      "Essential Services": 30,
+      "Education": 10,
+      "Recreation": 10
+    },
+    "spatial_extent": {
+      "min_longitude": 73.93,
+      "min_latitude": 18.5,
+      "max_longitude": 73.945,
+      "max_latitude": 18.515,
+      "width_km": 1.5789588859168857,
+      "height_km": 1.665000000000063
+    }
+  },
+  "correlation_analysis": {
+    "category_luminosity_correlations": {
+      "Commercial": 0.16551485371675603,
+      "Education": 0.13807309993723274,
+      "Essential Services": -0.1897616661962127,
+      "Recreation": -0.10257940083602587
+    },
+    "correlation_tests": {
+      "Commercial": {
+        "statistic": 1000.0,
+        "p_value": 0.012983777767354841,
+        "significant": "True",
+        "mean_luminosity": 43.06890793883478,
+        "median_luminosity": 42.61640594696782
+      },
+      "Education": {
+        "statistic": 350.0,
+        "p_value": 1.0,
+        "significant": "False",
+        "mean_luminosity": 43.97945840421848,
+        "median_luminosity": 43.97945840421848
+      },
+      "Essential Services": {
+        "statistic": 650.0,
+        "p_value": 0.3218328015764895,
+        "significant": "False",
+        "mean_luminosity": 40.31458692237966,
+        "median_luminosity": 40.640907208278904
+      },
+      "Recreation": {
+        "statistic": 200.0,
+        "p_value": 0.029332034784354456,
+        "significant": "True",
+        "mean_luminosity": 40.155940975882544,
+        "median_luminosity": 40.155940975882544
+      }
+    }
+  },
+  "spatial_analysis": {
+    "morans_i": 0.15161866269346996,
+    "spatial_autocorrelation": "positive",
+    "autocorrelation_strength": 0.15161866269346996
+  },
+  "cluster_analysis": {
+    "cluster_summary": {
+      "('viirs_luminosity', 'count')": {
+        "0": 15,
+        "1": 20,
+        "2": 20,
+        "3": 20,
+        "4": 5
+      },
+      "('viirs_luminosity', 'mean')": {
+        "0": 35.499,
+        "1": 44.38,
+        "2": 43.911,
+        "3": 38.147,
+        "4": 56.326
+      },
+      "('viirs_luminosity', 'std')": {
+        "0": 3.541,
+        "1": 3.327,
+        "2": 2.358,
+        "3": 3.653,
+        "4": 0.0
+      },
+      "('viirs_luminosity', 'median')": {
+        "0": 34.912,
+        "1": 44.143,
+        "2": 44.327,
+        "3": 39.363,
+        "4": 56.326
+      },
+      "('category_group', '<lambda>')": {
+        "0": "Education",
+        "1": "Commercial",
+        "2": "Commercial",
+        "3": "Commercial",
+        "4": "Education"
+      }
+    },
+    "silhouette_score": 0.497336115373945,
+    "cluster_quality": "moderate"
+  },
+  "anomaly_analysis": {
+    "anomaly_distribution": {
+      "Normal": 60,
+      "High Light, Non-Commercial": 15,
+      "Low Light, Commercial": 5
+    },
+    "anomaly_characteristics": {
+      "Normal": {
+        "count": 60,
+        "mean_luminosity": 40.047181866531346,
+        "median_luminosity": 40.640907208278904,
+        "dominant_category": "Commercial"
+      },
+      "High Light, Non-Commercial": {
+        "count": 15,
+        "mean_luminosity": 49.900658953998054,
+        "median_luminosity": 46.74946513413493,
+        "dominant_category": "Essential Services"
+      },
+      "Low Light, Commercial": {
+        "count": 5,
+        "mean_luminosity": 38.303608667118574,
+        "median_luminosity": 38.303608667118574,
+        "dominant_category": "Commercial"
+      }
+    }
+  }
+}

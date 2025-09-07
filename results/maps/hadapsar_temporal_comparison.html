@@ -1,0 +1,2025 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_57b554b1b41ddd235ea7e07fc3f8b94f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/python-visualization/folium@main/folium/templates/leaflet_heat.min.js"></script>
+</head>
+<body>
+    
+    
+        <div style="position: fixed; 
+                    top: 10px; left: 50px; width: 400px; height: 40px; 
+                    background-color: white; border:2px solid grey; z-index:9999; 
+                    font-size:16px; font-weight:bold; padding: 10px">
+        Hadapsar Temporal Analysis (Demo)
+        </div>
+        
+    
+            <div class="folium-map" id="map_57b554b1b41ddd235ea7e07fc3f8b94f" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_57b554b1b41ddd235ea7e07fc3f8b94f = L.map(
+                "map_57b554b1b41ddd235ea7e07fc3f8b94f",
+                {
+                    center: [18.505, 73.935],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_166249e9bbf6180080d923b0c5bc48b4 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_166249e9bbf6180080d923b0c5bc48b4.addTo(map_57b554b1b41ddd235ea7e07fc3f8b94f);
+        
+    
+            var tile_layer_62dea46f0690dbfa58c54a7b1674a3fc = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_62dea46f0690dbfa58c54a7b1674a3fc.addTo(map_57b554b1b41ddd235ea7e07fc3f8b94f);
+        
+    
+            var marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var circle_marker_99eb0487470056aa5294a6fc386a0cf3 = L.circleMarker(
+                [18.5, 73.93],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_65af5a664ff2e03f2d710ce68eb7d8c3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c1375c500b23696280f0f22aa88017cd = $(`<div id="html_c1375c500b23696280f0f22aa88017cd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 0</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 48.38</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_65af5a664ff2e03f2d710ce68eb7d8c3.setContent(html_c1375c500b23696280f0f22aa88017cd);
+            
+        
+
+        circle_marker_99eb0487470056aa5294a6fc386a0cf3.bindPopup(popup_65af5a664ff2e03f2d710ce68eb7d8c3)
+        ;
+
+        
+    
+    
+            var circle_marker_c656ae5a4193e7da5a106d72508bf478 = L.circleMarker(
+                [18.501, 73.931],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_e1e2d60998a6215756b234c420a8d2b0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5cd90c911a2931fbb56add20be8cf64f = $(`<div id="html_5cd90c911a2931fbb56add20be8cf64f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 1</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_e1e2d60998a6215756b234c420a8d2b0.setContent(html_5cd90c911a2931fbb56add20be8cf64f);
+            
+        
+
+        circle_marker_c656ae5a4193e7da5a106d72508bf478.bindPopup(popup_e1e2d60998a6215756b234c420a8d2b0)
+        ;
+
+        
+    
+    
+            var circle_marker_6b6493e95424ec1d0b2d271a421b2aef = L.circleMarker(
+                [18.502, 73.932],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3cb3801e650bada11b0c91806f3eab11 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b909f5687d9d924e35940247ede97f37 = $(`<div id="html_b909f5687d9d924e35940247ede97f37" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 2</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.86</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_3cb3801e650bada11b0c91806f3eab11.setContent(html_b909f5687d9d924e35940247ede97f37);
+            
+        
+
+        circle_marker_6b6493e95424ec1d0b2d271a421b2aef.bindPopup(popup_3cb3801e650bada11b0c91806f3eab11)
+        ;
+
+        
+    
+    
+            var circle_marker_7c7211070510371a4d4b3a6c1a1fd0b8 = L.circleMarker(
+                [18.503, 73.933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c0881a1784acc98087d9bc3125e0cadd = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1dd0e864bd46cd836be9a110045414a4 = $(`<div id="html_1dd0e864bd46cd836be9a110045414a4" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 3</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 46.75</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_c0881a1784acc98087d9bc3125e0cadd.setContent(html_1dd0e864bd46cd836be9a110045414a4);
+            
+        
+
+        circle_marker_7c7211070510371a4d4b3a6c1a1fd0b8.bindPopup(popup_c0881a1784acc98087d9bc3125e0cadd)
+        ;
+
+        
+    
+    
+            var circle_marker_84531efe8a3806edb597280e8c490e22 = L.circleMarker(
+                [18.504, 73.934],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3c69f8752a22196363417a0c27ce0882 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_87735a6c3ed88cd196e5d1088e49a795 = $(`<div id="html_87735a6c3ed88cd196e5d1088e49a795" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 4</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 56.33</p><p><strong>Cluster:</strong> 4</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_3c69f8752a22196363417a0c27ce0882.setContent(html_87735a6c3ed88cd196e5d1088e49a795);
+            
+        
+
+        circle_marker_84531efe8a3806edb597280e8c490e22.bindPopup(popup_3c69f8752a22196363417a0c27ce0882)
+        ;
+
+        
+    
+    
+            var circle_marker_3de8ec9f9f15441713991512b1a73bd7 = L.circleMarker(
+                [18.505, 73.935],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_d325d5a415371df3349c9e9b934bb667 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2aed56300efe0ade8cc9366014aa6cc0 = $(`<div id="html_2aed56300efe0ade8cc9366014aa6cc0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 5</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 40.36</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_d325d5a415371df3349c9e9b934bb667.setContent(html_2aed56300efe0ade8cc9366014aa6cc0);
+            
+        
+
+        circle_marker_3de8ec9f9f15441713991512b1a73bd7.bindPopup(popup_d325d5a415371df3349c9e9b934bb667)
+        ;
+
+        
+    
+    
+            var circle_marker_ea3f8db7f2c4c234293930903aec333a = L.circleMarker(
+                [18.506, 73.936],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_908bc1a3fae1440f618666a2597e9a09 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_871e6718953e0e992f68a9b7dc3b02f5 = $(`<div id="html_871e6718953e0e992f68a9b7dc3b02f5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 6</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Gas Station</p>         <p><strong>Nighttime Luminosity:</strong> 44.96</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_908bc1a3fae1440f618666a2597e9a09.setContent(html_871e6718953e0e992f68a9b7dc3b02f5);
+            
+        
+
+        circle_marker_ea3f8db7f2c4c234293930903aec333a.bindPopup(popup_908bc1a3fae1440f618666a2597e9a09)
+        ;
+
+        
+    
+    
+            var circle_marker_b68e805e4d9aa054aff2035186fb2a5e = L.circleMarker(
+                [18.507, 73.937],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_069f1b7ce9fee9e31c5615e3b3cf3fec = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8829a2258aae1eef0a81604d2d0faaff = $(`<div id="html_8829a2258aae1eef0a81604d2d0faaff" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 7</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Pharmacy</p>         <p><strong>Nighttime Luminosity:</strong> 46.63</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_069f1b7ce9fee9e31c5615e3b3cf3fec.setContent(html_8829a2258aae1eef0a81604d2d0faaff);
+            
+        
+
+        circle_marker_b68e805e4d9aa054aff2035186fb2a5e.bindPopup(popup_069f1b7ce9fee9e31c5615e3b3cf3fec)
+        ;
+
+        
+    
+    
+            var circle_marker_9bdf1b19cec9e6307b14d81f28f13790 = L.circleMarker(
+                [18.508, 73.938],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_926119cb48fd26dea6bf7212ab69c82d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5c11cb1b126554981a1e3ae2a7fbf6c1 = $(`<div id="html_5c11cb1b126554981a1e3ae2a7fbf6c1" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 8</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> ATM</p>         <p><strong>Nighttime Luminosity:</strong> 32.32</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_926119cb48fd26dea6bf7212ab69c82d.setContent(html_5c11cb1b126554981a1e3ae2a7fbf6c1);
+            
+        
+
+        circle_marker_9bdf1b19cec9e6307b14d81f28f13790.bindPopup(popup_926119cb48fd26dea6bf7212ab69c82d)
+        ;
+
+        
+    
+    
+            var circle_marker_cd5adf3cc4fc91a155d46ab438d133c8 = L.circleMarker(
+                [18.509, 73.939],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_40a1f61969775da0b8e385500c66b24f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_85bfa3b534bce2b95f9feac4be851f0c = $(`<div id="html_85bfa3b534bce2b95f9feac4be851f0c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 9</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Hotel</p>         <p><strong>Nighttime Luminosity:</strong> 43.69</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_40a1f61969775da0b8e385500c66b24f.setContent(html_85bfa3b534bce2b95f9feac4be851f0c);
+            
+        
+
+        circle_marker_cd5adf3cc4fc91a155d46ab438d133c8.bindPopup(popup_40a1f61969775da0b8e385500c66b24f)
+        ;
+
+        
+    
+    
+            var circle_marker_f3f5d87575c8c9e73fa4ac8ef066b26a = L.circleMarker(
+                [18.51, 73.94],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_fdcac9aed43f6e92811e1fdd6350e0b5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d6cf23c2b1cacbc9ad698654a6899e1c = $(`<div id="html_d6cf23c2b1cacbc9ad698654a6899e1c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 10</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_fdcac9aed43f6e92811e1fdd6350e0b5.setContent(html_d6cf23c2b1cacbc9ad698654a6899e1c);
+            
+        
+
+        circle_marker_f3f5d87575c8c9e73fa4ac8ef066b26a.bindPopup(popup_fdcac9aed43f6e92811e1fdd6350e0b5)
+        ;
+
+        
+    
+    
+            var circle_marker_2c7d91c797a14db9b9105e1c6dbef513 = L.circleMarker(
+                [18.511, 73.941],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_39a975adbfb95cdd82067cf55fe25d1e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_074c437a8e2de1863d83374341dfa38c = $(`<div id="html_074c437a8e2de1863d83374341dfa38c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 11</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 38.30</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Low Light, Commercial</p></div></div>`)[0];
+                popup_39a975adbfb95cdd82067cf55fe25d1e.setContent(html_074c437a8e2de1863d83374341dfa38c);
+            
+        
+
+        circle_marker_2c7d91c797a14db9b9105e1c6dbef513.bindPopup(popup_39a975adbfb95cdd82067cf55fe25d1e)
+        ;
+
+        
+    
+    
+            var circle_marker_941666bde330cb4125a1407da4356ee9 = L.circleMarker(
+                [18.512, 73.942],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c471ab9be1209193404ac1edd9c11c91 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_976cbca7942be74515a9d05c934251ed = $(`<div id="html_976cbca7942be74515a9d05c934251ed" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 12</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.42</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_c471ab9be1209193404ac1edd9c11c91.setContent(html_976cbca7942be74515a9d05c934251ed);
+            
+        
+
+        circle_marker_941666bde330cb4125a1407da4356ee9.bindPopup(popup_c471ab9be1209193404ac1edd9c11c91)
+        ;
+
+        
+    
+    
+            var circle_marker_1e4b99c42a417df3073e1c0caaa04132 = L.circleMarker(
+                [18.513, 73.943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_ccad09595c36088ff0964a2cdbf9f39e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_318750cbfac3db87452eb9dcecc404de = $(`<div id="html_318750cbfac3db87452eb9dcecc404de" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 13</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 34.91</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_ccad09595c36088ff0964a2cdbf9f39e.setContent(html_318750cbfac3db87452eb9dcecc404de);
+            
+        
+
+        circle_marker_1e4b99c42a417df3073e1c0caaa04132.bindPopup(popup_ccad09595c36088ff0964a2cdbf9f39e)
+        ;
+
+        
+    
+    
+            var circle_marker_d89e10fdd761b53a4ca65d5783ea83ae = L.circleMarker(
+                [18.514, 73.944],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_9f33f51335a36b7fb44eb951f252b0e4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_12437d37d5757ee266292aaaf8de6d68 = $(`<div id="html_12437d37d5757ee266292aaaf8de6d68" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 14</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 31.63</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_9f33f51335a36b7fb44eb951f252b0e4.setContent(html_12437d37d5757ee266292aaaf8de6d68);
+            
+        
+
+        circle_marker_d89e10fdd761b53a4ca65d5783ea83ae.bindPopup(popup_9f33f51335a36b7fb44eb951f252b0e4)
+        ;
+
+        
+    
+    
+            var circle_marker_58facc6c53a12035c6566a8d8af94a98 = L.circleMarker(
+                [18.515, 73.945],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_2fd81a9d0bfb9fb50d964202fb65857d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_426ef46ab5e37b68967a96383024b2d4 = $(`<div id="html_426ef46ab5e37b68967a96383024b2d4" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 15</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 39.95</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_2fd81a9d0bfb9fb50d964202fb65857d.setContent(html_426ef46ab5e37b68967a96383024b2d4);
+            
+        
+
+        circle_marker_58facc6c53a12035c6566a8d8af94a98.bindPopup(popup_2fd81a9d0bfb9fb50d964202fb65857d)
+        ;
+
+        
+    
+    
+            var circle_marker_af4ff0f293bd8b9be381ea07f4dbc672 = L.circleMarker(
+                [18.5, 73.93],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_a97da518298fecde6048837968219f7f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e31df224941a6bf54636e122cced61a8 = $(`<div id="html_e31df224941a6bf54636e122cced61a8" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 20</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 48.38</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_a97da518298fecde6048837968219f7f.setContent(html_e31df224941a6bf54636e122cced61a8);
+            
+        
+
+        circle_marker_af4ff0f293bd8b9be381ea07f4dbc672.bindPopup(popup_a97da518298fecde6048837968219f7f)
+        ;
+
+        
+    
+    
+            var circle_marker_ae571cd2245a08dd7dee72e3be14aa80 = L.circleMarker(
+                [18.501, 73.931],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_45b4e8929696b17f66ea1a96331f6644 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b90cb15e81159c23cb68a393b55e647e = $(`<div id="html_b90cb15e81159c23cb68a393b55e647e" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 21</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_45b4e8929696b17f66ea1a96331f6644.setContent(html_b90cb15e81159c23cb68a393b55e647e);
+            
+        
+
+        circle_marker_ae571cd2245a08dd7dee72e3be14aa80.bindPopup(popup_45b4e8929696b17f66ea1a96331f6644)
+        ;
+
+        
+    
+    
+            var circle_marker_95b74cf2eec06159865fa02fab66e734 = L.circleMarker(
+                [18.502, 73.932],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_6733c8e43f7338258a4dc1d35f2b3b7f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_825d36616eefab40d1c51b43744bff55 = $(`<div id="html_825d36616eefab40d1c51b43744bff55" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 22</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.86</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_6733c8e43f7338258a4dc1d35f2b3b7f.setContent(html_825d36616eefab40d1c51b43744bff55);
+            
+        
+
+        circle_marker_95b74cf2eec06159865fa02fab66e734.bindPopup(popup_6733c8e43f7338258a4dc1d35f2b3b7f)
+        ;
+
+        
+    
+    
+            var circle_marker_ecdc0faf40577b071ef4130288b19607 = L.circleMarker(
+                [18.503, 73.933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_eca74a5bb6f80b78642a1fc0e57e2517 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4be015d8bccd24e9340ba414996e0152 = $(`<div id="html_4be015d8bccd24e9340ba414996e0152" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 23</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 46.75</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_eca74a5bb6f80b78642a1fc0e57e2517.setContent(html_4be015d8bccd24e9340ba414996e0152);
+            
+        
+
+        circle_marker_ecdc0faf40577b071ef4130288b19607.bindPopup(popup_eca74a5bb6f80b78642a1fc0e57e2517)
+        ;
+
+        
+    
+    
+            var circle_marker_85baab6b3401ccb15686db8dd360ffa6 = L.circleMarker(
+                [18.504, 73.934],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_8cfe28c7a16c1e91c66510dc69c29c03 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0c2a1be9e3555ecdf453fa0e1e7e5a23 = $(`<div id="html_0c2a1be9e3555ecdf453fa0e1e7e5a23" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 24</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 56.33</p><p><strong>Cluster:</strong> 4</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_8cfe28c7a16c1e91c66510dc69c29c03.setContent(html_0c2a1be9e3555ecdf453fa0e1e7e5a23);
+            
+        
+
+        circle_marker_85baab6b3401ccb15686db8dd360ffa6.bindPopup(popup_8cfe28c7a16c1e91c66510dc69c29c03)
+        ;
+
+        
+    
+    
+            var circle_marker_e0fbe52f84376ee941a2cc07ee2b3c90 = L.circleMarker(
+                [18.505, 73.935],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_5512dedb601877051eb10185e074d8ea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8db06b85ac332add16da861b67ac9e7d = $(`<div id="html_8db06b85ac332add16da861b67ac9e7d" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 25</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 40.36</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_5512dedb601877051eb10185e074d8ea.setContent(html_8db06b85ac332add16da861b67ac9e7d);
+            
+        
+
+        circle_marker_e0fbe52f84376ee941a2cc07ee2b3c90.bindPopup(popup_5512dedb601877051eb10185e074d8ea)
+        ;
+
+        
+    
+    
+            var circle_marker_0eeea2a08679f7235c0682b1587ca24f = L.circleMarker(
+                [18.506, 73.936],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_8230a7215abb02dfd5b29ffc1f90a030 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_40061498ad7bbbf83d82e308e7035067 = $(`<div id="html_40061498ad7bbbf83d82e308e7035067" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 26</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Gas Station</p>         <p><strong>Nighttime Luminosity:</strong> 44.96</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_8230a7215abb02dfd5b29ffc1f90a030.setContent(html_40061498ad7bbbf83d82e308e7035067);
+            
+        
+
+        circle_marker_0eeea2a08679f7235c0682b1587ca24f.bindPopup(popup_8230a7215abb02dfd5b29ffc1f90a030)
+        ;
+
+        
+    
+    
+            var circle_marker_eb4a76a508e8b48389197edb2d8b7460 = L.circleMarker(
+                [18.507, 73.937],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_f076795a16947d46155b051c626358e8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_17ca21b86d15986267f3b90fcc800b19 = $(`<div id="html_17ca21b86d15986267f3b90fcc800b19" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 27</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Pharmacy</p>         <p><strong>Nighttime Luminosity:</strong> 46.63</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_f076795a16947d46155b051c626358e8.setContent(html_17ca21b86d15986267f3b90fcc800b19);
+            
+        
+
+        circle_marker_eb4a76a508e8b48389197edb2d8b7460.bindPopup(popup_f076795a16947d46155b051c626358e8)
+        ;
+
+        
+    
+    
+            var circle_marker_b09b986f9f91a2627a0bc473b0f5b3be = L.circleMarker(
+                [18.508, 73.938],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3680c443d03824f5ee3d42ca68b635fc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9e863ce252e7f9b6e708a006bdd27427 = $(`<div id="html_9e863ce252e7f9b6e708a006bdd27427" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 28</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> ATM</p>         <p><strong>Nighttime Luminosity:</strong> 32.32</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_3680c443d03824f5ee3d42ca68b635fc.setContent(html_9e863ce252e7f9b6e708a006bdd27427);
+            
+        
+
+        circle_marker_b09b986f9f91a2627a0bc473b0f5b3be.bindPopup(popup_3680c443d03824f5ee3d42ca68b635fc)
+        ;
+
+        
+    
+    
+            var circle_marker_ff1399786cc8eca7ee932bf7dbcae67e = L.circleMarker(
+                [18.509, 73.939],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_cf51e8107b6f6f2473254b3e5008dee2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b3d7e91e62c44559cb027dfe95d69df6 = $(`<div id="html_b3d7e91e62c44559cb027dfe95d69df6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 29</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Hotel</p>         <p><strong>Nighttime Luminosity:</strong> 43.69</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_cf51e8107b6f6f2473254b3e5008dee2.setContent(html_b3d7e91e62c44559cb027dfe95d69df6);
+            
+        
+
+        circle_marker_ff1399786cc8eca7ee932bf7dbcae67e.bindPopup(popup_cf51e8107b6f6f2473254b3e5008dee2)
+        ;
+
+        
+    
+    
+            var circle_marker_8542af31d37d9a16d08fd3ab103f7cc4 = L.circleMarker(
+                [18.51, 73.94],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_9b77611a70d69aaeec9e682ba00f0e65 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5a3ea0657aec14864cdb359860f787ef = $(`<div id="html_5a3ea0657aec14864cdb359860f787ef" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 30</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_9b77611a70d69aaeec9e682ba00f0e65.setContent(html_5a3ea0657aec14864cdb359860f787ef);
+            
+        
+
+        circle_marker_8542af31d37d9a16d08fd3ab103f7cc4.bindPopup(popup_9b77611a70d69aaeec9e682ba00f0e65)
+        ;
+
+        
+    
+    
+            var circle_marker_2f83359410c67c01ca88073b478dd134 = L.circleMarker(
+                [18.511, 73.941],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3f1deb5edc12c6f83679dbd3350d7e4f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8cce098b4c72d451b05d412d9b987c8f = $(`<div id="html_8cce098b4c72d451b05d412d9b987c8f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 31</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 38.30</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Low Light, Commercial</p></div></div>`)[0];
+                popup_3f1deb5edc12c6f83679dbd3350d7e4f.setContent(html_8cce098b4c72d451b05d412d9b987c8f);
+            
+        
+
+        circle_marker_2f83359410c67c01ca88073b478dd134.bindPopup(popup_3f1deb5edc12c6f83679dbd3350d7e4f)
+        ;
+
+        
+    
+    
+            var circle_marker_60a250136838a11f1623272e87f7edc9 = L.circleMarker(
+                [18.512, 73.942],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_54ee14417902c1e21519e13e619bcac2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_34553cc19709fbf5d3e7e95adb145f3a = $(`<div id="html_34553cc19709fbf5d3e7e95adb145f3a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 32</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.42</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_54ee14417902c1e21519e13e619bcac2.setContent(html_34553cc19709fbf5d3e7e95adb145f3a);
+            
+        
+
+        circle_marker_60a250136838a11f1623272e87f7edc9.bindPopup(popup_54ee14417902c1e21519e13e619bcac2)
+        ;
+
+        
+    
+    
+            var circle_marker_7006bf2118a38c27eabfa6d29c266c55 = L.circleMarker(
+                [18.513, 73.943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c52fe706f4ac1028b0f52d3fa7b4f277 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_298a11e1c3b4218a406169875d9a304b = $(`<div id="html_298a11e1c3b4218a406169875d9a304b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 33</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 34.91</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_c52fe706f4ac1028b0f52d3fa7b4f277.setContent(html_298a11e1c3b4218a406169875d9a304b);
+            
+        
+
+        circle_marker_7006bf2118a38c27eabfa6d29c266c55.bindPopup(popup_c52fe706f4ac1028b0f52d3fa7b4f277)
+        ;
+
+        
+    
+    
+            var circle_marker_11ca2f354bad0ce642c566bf8c9423b5 = L.circleMarker(
+                [18.514, 73.944],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_39597a50f33f2fc7360fa04bf35924b1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cb89e0745a28da3e2bf06071e39834c6 = $(`<div id="html_cb89e0745a28da3e2bf06071e39834c6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 34</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 31.63</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_39597a50f33f2fc7360fa04bf35924b1.setContent(html_cb89e0745a28da3e2bf06071e39834c6);
+            
+        
+
+        circle_marker_11ca2f354bad0ce642c566bf8c9423b5.bindPopup(popup_39597a50f33f2fc7360fa04bf35924b1)
+        ;
+
+        
+    
+    
+            var circle_marker_cfba1069d8681940acccae8545fb1278 = L.circleMarker(
+                [18.515, 73.945],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_cafafc93f6dc1f09d8311be18214a1a8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6cb4be6c026c11c8735b4f4cad15078f = $(`<div id="html_6cb4be6c026c11c8735b4f4cad15078f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 35</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 39.95</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_cafafc93f6dc1f09d8311be18214a1a8.setContent(html_6cb4be6c026c11c8735b4f4cad15078f);
+            
+        
+
+        circle_marker_cfba1069d8681940acccae8545fb1278.bindPopup(popup_cafafc93f6dc1f09d8311be18214a1a8)
+        ;
+
+        
+    
+    
+            var circle_marker_3f4a32b41dd18e180fdaa3250c60cfc9 = L.circleMarker(
+                [18.5, 73.93],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_4dcf0bb320fc14bed6f516d45d3df71e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c05c125866a1f170da5ad534e3d67ab6 = $(`<div id="html_c05c125866a1f170da5ad534e3d67ab6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 40</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 48.38</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_4dcf0bb320fc14bed6f516d45d3df71e.setContent(html_c05c125866a1f170da5ad534e3d67ab6);
+            
+        
+
+        circle_marker_3f4a32b41dd18e180fdaa3250c60cfc9.bindPopup(popup_4dcf0bb320fc14bed6f516d45d3df71e)
+        ;
+
+        
+    
+    
+            var circle_marker_0edcc9cfb797d6b43f6c1bcd2a215588 = L.circleMarker(
+                [18.501, 73.931],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_1fd6e40c41912028e44ab4e7677a51c5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a93871bc2cc41727afd0fda090572dfd = $(`<div id="html_a93871bc2cc41727afd0fda090572dfd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 41</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_1fd6e40c41912028e44ab4e7677a51c5.setContent(html_a93871bc2cc41727afd0fda090572dfd);
+            
+        
+
+        circle_marker_0edcc9cfb797d6b43f6c1bcd2a215588.bindPopup(popup_1fd6e40c41912028e44ab4e7677a51c5)
+        ;
+
+        
+    
+    
+            var circle_marker_3a1ded209fbb02cee0984bcf54f82134 = L.circleMarker(
+                [18.502, 73.932],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_9702c3c47668e68613fcfabce7effdfb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_43c4944dbe5301e0a3149e1fe61c1ac5 = $(`<div id="html_43c4944dbe5301e0a3149e1fe61c1ac5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 42</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.86</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_9702c3c47668e68613fcfabce7effdfb.setContent(html_43c4944dbe5301e0a3149e1fe61c1ac5);
+            
+        
+
+        circle_marker_3a1ded209fbb02cee0984bcf54f82134.bindPopup(popup_9702c3c47668e68613fcfabce7effdfb)
+        ;
+
+        
+    
+    
+            var circle_marker_f63eaeb1cc6e52a58cc803bb950ae349 = L.circleMarker(
+                [18.503, 73.933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c66ac523153d52b9afb7b722e4cbaef0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_03f36b82a5f1fed30efadd99883bf7e8 = $(`<div id="html_03f36b82a5f1fed30efadd99883bf7e8" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 43</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 46.75</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_c66ac523153d52b9afb7b722e4cbaef0.setContent(html_03f36b82a5f1fed30efadd99883bf7e8);
+            
+        
+
+        circle_marker_f63eaeb1cc6e52a58cc803bb950ae349.bindPopup(popup_c66ac523153d52b9afb7b722e4cbaef0)
+        ;
+
+        
+    
+    
+            var circle_marker_562c518d28b02517c1ae1ac424647635 = L.circleMarker(
+                [18.504, 73.934],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_fee092d7c58fc8ffdcd1bb2f1688bdf5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c3b42a2d2f815a09abd7efd619d922f7 = $(`<div id="html_c3b42a2d2f815a09abd7efd619d922f7" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 44</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 56.33</p><p><strong>Cluster:</strong> 4</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_fee092d7c58fc8ffdcd1bb2f1688bdf5.setContent(html_c3b42a2d2f815a09abd7efd619d922f7);
+            
+        
+
+        circle_marker_562c518d28b02517c1ae1ac424647635.bindPopup(popup_fee092d7c58fc8ffdcd1bb2f1688bdf5)
+        ;
+
+        
+    
+    
+            var circle_marker_4c8d8a52e151aa6fa5f3d88ac08ec167 = L.circleMarker(
+                [18.505, 73.935],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3c3d18335d4cc254ce09df12dda23993 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_83dce184b2b7465b5307b3387ab703cd = $(`<div id="html_83dce184b2b7465b5307b3387ab703cd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 45</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 40.36</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_3c3d18335d4cc254ce09df12dda23993.setContent(html_83dce184b2b7465b5307b3387ab703cd);
+            
+        
+
+        circle_marker_4c8d8a52e151aa6fa5f3d88ac08ec167.bindPopup(popup_3c3d18335d4cc254ce09df12dda23993)
+        ;
+
+        
+    
+    
+            var circle_marker_4628e2ea09dc4104ed4b73e0f43abab0 = L.circleMarker(
+                [18.506, 73.936],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_625d93b7304e824421735d96e6532441 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6034860a337c5ad217a820a9337e77c3 = $(`<div id="html_6034860a337c5ad217a820a9337e77c3" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 46</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Gas Station</p>         <p><strong>Nighttime Luminosity:</strong> 44.96</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_625d93b7304e824421735d96e6532441.setContent(html_6034860a337c5ad217a820a9337e77c3);
+            
+        
+
+        circle_marker_4628e2ea09dc4104ed4b73e0f43abab0.bindPopup(popup_625d93b7304e824421735d96e6532441)
+        ;
+
+        
+    
+    
+            var circle_marker_415b09657a2f432d535ad531f7751833 = L.circleMarker(
+                [18.507, 73.937],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3bc2a4916467be429e2a7618b30f677f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e8a1fa0c3e2c476e16100697221622c9 = $(`<div id="html_e8a1fa0c3e2c476e16100697221622c9" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 47</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Pharmacy</p>         <p><strong>Nighttime Luminosity:</strong> 46.63</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_3bc2a4916467be429e2a7618b30f677f.setContent(html_e8a1fa0c3e2c476e16100697221622c9);
+            
+        
+
+        circle_marker_415b09657a2f432d535ad531f7751833.bindPopup(popup_3bc2a4916467be429e2a7618b30f677f)
+        ;
+
+        
+    
+    
+            var circle_marker_6eaa02d55375e4feabc8c1c4a3bd1dcd = L.circleMarker(
+                [18.508, 73.938],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_1bd2fb6e81b6d6fb3d7cbc9753bbc914 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c8d41fc8fa671e06e790747433427e65 = $(`<div id="html_c8d41fc8fa671e06e790747433427e65" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 48</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> ATM</p>         <p><strong>Nighttime Luminosity:</strong> 32.32</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_1bd2fb6e81b6d6fb3d7cbc9753bbc914.setContent(html_c8d41fc8fa671e06e790747433427e65);
+            
+        
+
+        circle_marker_6eaa02d55375e4feabc8c1c4a3bd1dcd.bindPopup(popup_1bd2fb6e81b6d6fb3d7cbc9753bbc914)
+        ;
+
+        
+    
+    
+            var circle_marker_063e86d1eb20a13150b28fb7be43d633 = L.circleMarker(
+                [18.509, 73.939],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_ae6dec1938c2101fcea20b3cf28fcab7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a652a363ab3f3f03f6c6af8455b22bff = $(`<div id="html_a652a363ab3f3f03f6c6af8455b22bff" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 49</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Hotel</p>         <p><strong>Nighttime Luminosity:</strong> 43.69</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_ae6dec1938c2101fcea20b3cf28fcab7.setContent(html_a652a363ab3f3f03f6c6af8455b22bff);
+            
+        
+
+        circle_marker_063e86d1eb20a13150b28fb7be43d633.bindPopup(popup_ae6dec1938c2101fcea20b3cf28fcab7)
+        ;
+
+        
+    
+    
+            var circle_marker_62d21a521e6ab4c9c344d71e642b51db = L.circleMarker(
+                [18.51, 73.94],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_db1e80eaeb1500cfbbabc8a7521f84a9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_af5ee998d90edd80086299ec84145942 = $(`<div id="html_af5ee998d90edd80086299ec84145942" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 50</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_db1e80eaeb1500cfbbabc8a7521f84a9.setContent(html_af5ee998d90edd80086299ec84145942);
+            
+        
+
+        circle_marker_62d21a521e6ab4c9c344d71e642b51db.bindPopup(popup_db1e80eaeb1500cfbbabc8a7521f84a9)
+        ;
+
+        
+    
+    
+            var circle_marker_d4126cd34a1a832668c6bc0f9237c306 = L.circleMarker(
+                [18.511, 73.941],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c90850d1395c40aa37b10cf89f56093b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5babd6d6ad6cf7d84cc930004b8865d5 = $(`<div id="html_5babd6d6ad6cf7d84cc930004b8865d5" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 51</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 38.30</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Low Light, Commercial</p></div></div>`)[0];
+                popup_c90850d1395c40aa37b10cf89f56093b.setContent(html_5babd6d6ad6cf7d84cc930004b8865d5);
+            
+        
+
+        circle_marker_d4126cd34a1a832668c6bc0f9237c306.bindPopup(popup_c90850d1395c40aa37b10cf89f56093b)
+        ;
+
+        
+    
+    
+            var circle_marker_d9312c8ff6a3d85894d93703cbda68b0 = L.circleMarker(
+                [18.512, 73.942],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_dbe3a3d6d9fdfbcb3791ee2000b93628 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_20808a6e5117e05c532448a3cbc9457c = $(`<div id="html_20808a6e5117e05c532448a3cbc9457c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 52</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.42</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_dbe3a3d6d9fdfbcb3791ee2000b93628.setContent(html_20808a6e5117e05c532448a3cbc9457c);
+            
+        
+
+        circle_marker_d9312c8ff6a3d85894d93703cbda68b0.bindPopup(popup_dbe3a3d6d9fdfbcb3791ee2000b93628)
+        ;
+
+        
+    
+    
+            var circle_marker_d1c633e9e96b8c81d8c0cf4e71f4c5d1 = L.circleMarker(
+                [18.513, 73.943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_7abab33a7f0aaad0316f8f53b43e1b27 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7c72868f62f18f58c4cef9c216df21af = $(`<div id="html_7c72868f62f18f58c4cef9c216df21af" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 53</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 34.91</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_7abab33a7f0aaad0316f8f53b43e1b27.setContent(html_7c72868f62f18f58c4cef9c216df21af);
+            
+        
+
+        circle_marker_d1c633e9e96b8c81d8c0cf4e71f4c5d1.bindPopup(popup_7abab33a7f0aaad0316f8f53b43e1b27)
+        ;
+
+        
+    
+    
+            var circle_marker_1a80134bd13b39447a62c5af9f18c6ed = L.circleMarker(
+                [18.514, 73.944],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_557ee66bc1901b92b25f5f3f60aa5350 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_93949977ad5e75ce542ceed76350c373 = $(`<div id="html_93949977ad5e75ce542ceed76350c373" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 54</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 31.63</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_557ee66bc1901b92b25f5f3f60aa5350.setContent(html_93949977ad5e75ce542ceed76350c373);
+            
+        
+
+        circle_marker_1a80134bd13b39447a62c5af9f18c6ed.bindPopup(popup_557ee66bc1901b92b25f5f3f60aa5350)
+        ;
+
+        
+    
+    
+            var circle_marker_fb26706dd073d01177b9f97ebfe636b6 = L.circleMarker(
+                [18.515, 73.945],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c1817a82ecd336de0023ccee4b7a765a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_808e319eaaf0e95fc9a212adbeec61d0 = $(`<div id="html_808e319eaaf0e95fc9a212adbeec61d0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 55</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 39.95</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_c1817a82ecd336de0023ccee4b7a765a.setContent(html_808e319eaaf0e95fc9a212adbeec61d0);
+            
+        
+
+        circle_marker_fb26706dd073d01177b9f97ebfe636b6.bindPopup(popup_c1817a82ecd336de0023ccee4b7a765a)
+        ;
+
+        
+    
+    
+            var circle_marker_22e277e03bb2ac52bd2d04eb1129c022 = L.circleMarker(
+                [18.5, 73.93],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_48b43e22658fb304bac25544d59db71f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_be5c363e8da45dcd764d6e21ec8e243d = $(`<div id="html_be5c363e8da45dcd764d6e21ec8e243d" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 60</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 48.38</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_48b43e22658fb304bac25544d59db71f.setContent(html_be5c363e8da45dcd764d6e21ec8e243d);
+            
+        
+
+        circle_marker_22e277e03bb2ac52bd2d04eb1129c022.bindPopup(popup_48b43e22658fb304bac25544d59db71f)
+        ;
+
+        
+    
+    
+            var circle_marker_2986d86ec6e3b29deffa19a2cc8188ba = L.circleMarker(
+                [18.501, 73.931],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_1c11748d31171aa101f2537de901f6c0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6189a8fda97d8d3c65739c5857555616 = $(`<div id="html_6189a8fda97d8d3c65739c5857555616" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 61</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_1c11748d31171aa101f2537de901f6c0.setContent(html_6189a8fda97d8d3c65739c5857555616);
+            
+        
+
+        circle_marker_2986d86ec6e3b29deffa19a2cc8188ba.bindPopup(popup_1c11748d31171aa101f2537de901f6c0)
+        ;
+
+        
+    
+    
+            var circle_marker_4453d795aa9d0de4efb54d46e2be2782 = L.circleMarker(
+                [18.502, 73.932],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_a362d41e56c67067538216c61a92c95d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_21fff6dacde811bfaa165799ae2fac1b = $(`<div id="html_21fff6dacde811bfaa165799ae2fac1b" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 62</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.86</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_a362d41e56c67067538216c61a92c95d.setContent(html_21fff6dacde811bfaa165799ae2fac1b);
+            
+        
+
+        circle_marker_4453d795aa9d0de4efb54d46e2be2782.bindPopup(popup_a362d41e56c67067538216c61a92c95d)
+        ;
+
+        
+    
+    
+            var circle_marker_534161c7dcc324c69c7fc176aa897e97 = L.circleMarker(
+                [18.503, 73.933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_8ea1a5da2dc98e081e4a6e94bd3f35f2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_1e877eba3a6e632126a939108c65f4fa = $(`<div id="html_1e877eba3a6e632126a939108c65f4fa" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 63</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 46.75</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_8ea1a5da2dc98e081e4a6e94bd3f35f2.setContent(html_1e877eba3a6e632126a939108c65f4fa);
+            
+        
+
+        circle_marker_534161c7dcc324c69c7fc176aa897e97.bindPopup(popup_8ea1a5da2dc98e081e4a6e94bd3f35f2)
+        ;
+
+        
+    
+    
+            var circle_marker_b2fd0ebe889cc773b28a8b015b4ae8ae = L.circleMarker(
+                [18.504, 73.934],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_755f47f8cd9af04056d03e44847bdca3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_18d741ba51eecbc27709b68f6debae81 = $(`<div id="html_18d741ba51eecbc27709b68f6debae81" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 64</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 56.33</p><p><strong>Cluster:</strong> 4</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_755f47f8cd9af04056d03e44847bdca3.setContent(html_18d741ba51eecbc27709b68f6debae81);
+            
+        
+
+        circle_marker_b2fd0ebe889cc773b28a8b015b4ae8ae.bindPopup(popup_755f47f8cd9af04056d03e44847bdca3)
+        ;
+
+        
+    
+    
+            var circle_marker_14c40181037af4b3f55131b325f17351 = L.circleMarker(
+                [18.505, 73.935],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c444f5531f8ae52cf562d903d4381699 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_997b82b61d1316898c4e974476b72f45 = $(`<div id="html_997b82b61d1316898c4e974476b72f45" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 65</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 40.36</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_c444f5531f8ae52cf562d903d4381699.setContent(html_997b82b61d1316898c4e974476b72f45);
+            
+        
+
+        circle_marker_14c40181037af4b3f55131b325f17351.bindPopup(popup_c444f5531f8ae52cf562d903d4381699)
+        ;
+
+        
+    
+    
+            var circle_marker_8659122248bd1c7b20ded988e6817c0a = L.circleMarker(
+                [18.506, 73.936],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_9455b503357ede48d6d0b4480d195115 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_04b5320e025952be04e269254b9727fa = $(`<div id="html_04b5320e025952be04e269254b9727fa" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 66</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Gas Station</p>         <p><strong>Nighttime Luminosity:</strong> 44.96</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_9455b503357ede48d6d0b4480d195115.setContent(html_04b5320e025952be04e269254b9727fa);
+            
+        
+
+        circle_marker_8659122248bd1c7b20ded988e6817c0a.bindPopup(popup_9455b503357ede48d6d0b4480d195115)
+        ;
+
+        
+    
+    
+            var circle_marker_c16e6f0ffac40ffb51e4b2e6da3d0165 = L.circleMarker(
+                [18.507, 73.937],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_2b8dd4a7cea14c367a9e8cd4a55f2e48 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3e8779b10cef9748666609a89636e7eb = $(`<div id="html_3e8779b10cef9748666609a89636e7eb" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 67</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Pharmacy</p>         <p><strong>Nighttime Luminosity:</strong> 46.63</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_2b8dd4a7cea14c367a9e8cd4a55f2e48.setContent(html_3e8779b10cef9748666609a89636e7eb);
+            
+        
+
+        circle_marker_c16e6f0ffac40ffb51e4b2e6da3d0165.bindPopup(popup_2b8dd4a7cea14c367a9e8cd4a55f2e48)
+        ;
+
+        
+    
+    
+            var circle_marker_16a27d624e3eaae59fa7d60ce60a13c7 = L.circleMarker(
+                [18.508, 73.938],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_a68640de7a4d0bc6501815249588eb2d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_777798b9b5777e7261a92dec4d1881fd = $(`<div id="html_777798b9b5777e7261a92dec4d1881fd" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 68</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> ATM</p>         <p><strong>Nighttime Luminosity:</strong> 32.32</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_a68640de7a4d0bc6501815249588eb2d.setContent(html_777798b9b5777e7261a92dec4d1881fd);
+            
+        
+
+        circle_marker_16a27d624e3eaae59fa7d60ce60a13c7.bindPopup(popup_a68640de7a4d0bc6501815249588eb2d)
+        ;
+
+        
+    
+    
+            var circle_marker_258e685298c92c2951a4c45b85366659 = L.circleMarker(
+                [18.509, 73.939],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_c91c1f300bb97db4aeca08f562f2d927 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a634646e779deaf155b2352235028bff = $(`<div id="html_a634646e779deaf155b2352235028bff" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 69</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Hotel</p>         <p><strong>Nighttime Luminosity:</strong> 43.69</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_c91c1f300bb97db4aeca08f562f2d927.setContent(html_a634646e779deaf155b2352235028bff);
+            
+        
+
+        circle_marker_258e685298c92c2951a4c45b85366659.bindPopup(popup_c91c1f300bb97db4aeca08f562f2d927)
+        ;
+
+        
+    
+    
+            var circle_marker_2dff71ef010ed9db6cb7a5dfc06489f5 = L.circleMarker(
+                [18.51, 73.94],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_6daa6fe6078943e98d33a925a1388f57 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6a1012215840b885d52504d2b187f44f = $(`<div id="html_6a1012215840b885d52504d2b187f44f" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 70</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_6daa6fe6078943e98d33a925a1388f57.setContent(html_6a1012215840b885d52504d2b187f44f);
+            
+        
+
+        circle_marker_2dff71ef010ed9db6cb7a5dfc06489f5.bindPopup(popup_6daa6fe6078943e98d33a925a1388f57)
+        ;
+
+        
+    
+    
+            var circle_marker_4f7578979481ff26116946fb6013e77b = L.circleMarker(
+                [18.511, 73.941],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_8ebdd93b89e3f3d47a0871b6df18f886 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_66ef806e6011270be0e3d889de244659 = $(`<div id="html_66ef806e6011270be0e3d889de244659" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 71</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 38.30</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Low Light, Commercial</p></div></div>`)[0];
+                popup_8ebdd93b89e3f3d47a0871b6df18f886.setContent(html_66ef806e6011270be0e3d889de244659);
+            
+        
+
+        circle_marker_4f7578979481ff26116946fb6013e77b.bindPopup(popup_8ebdd93b89e3f3d47a0871b6df18f886)
+        ;
+
+        
+    
+    
+            var circle_marker_ecfc304819c69c9deb0b5cb6ee501ac8 = L.circleMarker(
+                [18.512, 73.942],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_01a458d751772eaaa74aa2ec2aa01a19 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9ee038a7f0ae4d2baddc1fff4004dd6a = $(`<div id="html_9ee038a7f0ae4d2baddc1fff4004dd6a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 72</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.42</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_01a458d751772eaaa74aa2ec2aa01a19.setContent(html_9ee038a7f0ae4d2baddc1fff4004dd6a);
+            
+        
+
+        circle_marker_ecfc304819c69c9deb0b5cb6ee501ac8.bindPopup(popup_01a458d751772eaaa74aa2ec2aa01a19)
+        ;
+
+        
+    
+    
+            var circle_marker_f091ba9ba5abe8f5385e23b804b99c94 = L.circleMarker(
+                [18.513, 73.943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_0e417d2378cd7b2c7fb3cc471c1a3cc0 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_bd88539e52a5bca231078fed8aae2d64 = $(`<div id="html_bd88539e52a5bca231078fed8aae2d64" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 73</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 34.91</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_0e417d2378cd7b2c7fb3cc471c1a3cc0.setContent(html_bd88539e52a5bca231078fed8aae2d64);
+            
+        
+
+        circle_marker_f091ba9ba5abe8f5385e23b804b99c94.bindPopup(popup_0e417d2378cd7b2c7fb3cc471c1a3cc0)
+        ;
+
+        
+    
+    
+            var circle_marker_91ad91ace3f574683dff9cf3b4589e06 = L.circleMarker(
+                [18.514, 73.944],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_58a93a4b9cb93c397d4790ac7ed37b4b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2411108d36ddd2799c6e8ff96b36cc87 = $(`<div id="html_2411108d36ddd2799c6e8ff96b36cc87" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 74</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 31.63</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_58a93a4b9cb93c397d4790ac7ed37b4b.setContent(html_2411108d36ddd2799c6e8ff96b36cc87);
+            
+        
+
+        circle_marker_91ad91ace3f574683dff9cf3b4589e06.bindPopup(popup_58a93a4b9cb93c397d4790ac7ed37b4b)
+        ;
+
+        
+    
+    
+            var circle_marker_9e155f80e0489d52ca52a13f31ae9798 = L.circleMarker(
+                [18.515, 73.945],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_3893613a14ed06a8535e0960555ce72d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_489dfdb3d6ec9ec20958022c1d10d2d0 = $(`<div id="html_489dfdb3d6ec9ec20958022c1d10d2d0" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 75</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 39.95</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_3893613a14ed06a8535e0960555ce72d.setContent(html_489dfdb3d6ec9ec20958022c1d10d2d0);
+            
+        
+
+        circle_marker_9e155f80e0489d52ca52a13f31ae9798.bindPopup(popup_3893613a14ed06a8535e0960555ce72d)
+        ;
+
+        
+    
+    
+            var circle_marker_b3bec73b1347a35788db11aa0a448755 = L.circleMarker(
+                [18.5, 73.93],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_2a0d319c475a9d16f9dc9c0affce5bd5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_67cb82137e3d3120849436bc4cc55d14 = $(`<div id="html_67cb82137e3d3120849436bc4cc55d14" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 80</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 48.38</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_2a0d319c475a9d16f9dc9c0affce5bd5.setContent(html_67cb82137e3d3120849436bc4cc55d14);
+            
+        
+
+        circle_marker_b3bec73b1347a35788db11aa0a448755.bindPopup(popup_2a0d319c475a9d16f9dc9c0affce5bd5)
+        ;
+
+        
+    
+    
+            var circle_marker_e9a65aaea437b33c9573fb9365069871 = L.circleMarker(
+                [18.501, 73.931],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_a3c781ca5fc9bbf8d0b4c951e7823714 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_32876d1f10066f653dcef0a65a096acf = $(`<div id="html_32876d1f10066f653dcef0a65a096acf" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 81</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_a3c781ca5fc9bbf8d0b4c951e7823714.setContent(html_32876d1f10066f653dcef0a65a096acf);
+            
+        
+
+        circle_marker_e9a65aaea437b33c9573fb9365069871.bindPopup(popup_a3c781ca5fc9bbf8d0b4c951e7823714)
+        ;
+
+        
+    
+    
+            var circle_marker_8f2b89e6d60abc8a9670fc0809b4aea9 = L.circleMarker(
+                [18.502, 73.932],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_339a21cb888521bdc7ceb86f3ed86711 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b27e3f869de9c564d7f3db00f1b917ca = $(`<div id="html_b27e3f869de9c564d7f3db00f1b917ca" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 82</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.86</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_339a21cb888521bdc7ceb86f3ed86711.setContent(html_b27e3f869de9c564d7f3db00f1b917ca);
+            
+        
+
+        circle_marker_8f2b89e6d60abc8a9670fc0809b4aea9.bindPopup(popup_339a21cb888521bdc7ceb86f3ed86711)
+        ;
+
+        
+    
+    
+            var circle_marker_da09d6a30d0e10573c64e957ff6d1b83 = L.circleMarker(
+                [18.503, 73.933],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_2090b620d3452e34352f103a85e7d5d7 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_52b7a1e089c343a018cad421f94229c6 = $(`<div id="html_52b7a1e089c343a018cad421f94229c6" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 83</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 46.75</p><p><strong>Cluster:</strong> 1</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_2090b620d3452e34352f103a85e7d5d7.setContent(html_52b7a1e089c343a018cad421f94229c6);
+            
+        
+
+        circle_marker_da09d6a30d0e10573c64e957ff6d1b83.bindPopup(popup_2090b620d3452e34352f103a85e7d5d7)
+        ;
+
+        
+    
+    
+            var circle_marker_f6146024a0819d54d80d685e20b48257 = L.circleMarker(
+                [18.504, 73.934],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_ff88f8b7e8253a410bda4d58f3f8cdfc = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_62358a4f60271f22eaf83eee1c9a23b8 = $(`<div id="html_62358a4f60271f22eaf83eee1c9a23b8" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 84</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 56.33</p><p><strong>Cluster:</strong> 4</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_ff88f8b7e8253a410bda4d58f3f8cdfc.setContent(html_62358a4f60271f22eaf83eee1c9a23b8);
+            
+        
+
+        circle_marker_f6146024a0819d54d80d685e20b48257.bindPopup(popup_ff88f8b7e8253a410bda4d58f3f8cdfc)
+        ;
+
+        
+    
+    
+            var circle_marker_9b0a131d51c8fcfabcebfa573df0a7dc = L.circleMarker(
+                [18.505, 73.935],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_73147fc233aeacf0440e414a3aa1c7b3 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_576ba0343f212a52ea5483137c3eba05 = $(`<div id="html_576ba0343f212a52ea5483137c3eba05" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 85</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 40.36</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_73147fc233aeacf0440e414a3aa1c7b3.setContent(html_576ba0343f212a52ea5483137c3eba05);
+            
+        
+
+        circle_marker_9b0a131d51c8fcfabcebfa573df0a7dc.bindPopup(popup_73147fc233aeacf0440e414a3aa1c7b3)
+        ;
+
+        
+    
+    
+            var circle_marker_5de7eaec3cc6fcd2af38b605054e86a9 = L.circleMarker(
+                [18.506, 73.936],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_09ceef067ac965fe908585c203775354 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_428958a834ac15930f92188c748d19de = $(`<div id="html_428958a834ac15930f92188c748d19de" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 86</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Gas Station</p>         <p><strong>Nighttime Luminosity:</strong> 44.96</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_09ceef067ac965fe908585c203775354.setContent(html_428958a834ac15930f92188c748d19de);
+            
+        
+
+        circle_marker_5de7eaec3cc6fcd2af38b605054e86a9.bindPopup(popup_09ceef067ac965fe908585c203775354)
+        ;
+
+        
+    
+    
+            var circle_marker_a47fa835a779c025b8838b503710f834 = L.circleMarker(
+                [18.507, 73.937],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_be5e4d4ac4e62b19ecc866485a14f153 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f897e22f8e97467d0bd2564449cd0f24 = $(`<div id="html_f897e22f8e97467d0bd2564449cd0f24" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 87</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Pharmacy</p>         <p><strong>Nighttime Luminosity:</strong> 46.63</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> High Light, Non-Commercial</p></div></div>`)[0];
+                popup_be5e4d4ac4e62b19ecc866485a14f153.setContent(html_f897e22f8e97467d0bd2564449cd0f24);
+            
+        
+
+        circle_marker_a47fa835a779c025b8838b503710f834.bindPopup(popup_be5e4d4ac4e62b19ecc866485a14f153)
+        ;
+
+        
+    
+    
+            var circle_marker_c666114117389fdc9c5a16c6f8622b53 = L.circleMarker(
+                [18.508, 73.938],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_ca2ba56bc5bc5fd1e44bbf36919e39f1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e630b8c1a66aaea22ab27d96d1f0b58a = $(`<div id="html_e630b8c1a66aaea22ab27d96d1f0b58a" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 88</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> ATM</p>         <p><strong>Nighttime Luminosity:</strong> 32.32</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_ca2ba56bc5bc5fd1e44bbf36919e39f1.setContent(html_e630b8c1a66aaea22ab27d96d1f0b58a);
+            
+        
+
+        circle_marker_c666114117389fdc9c5a16c6f8622b53.bindPopup(popup_ca2ba56bc5bc5fd1e44bbf36919e39f1)
+        ;
+
+        
+    
+    
+            var circle_marker_3d7b206fbed2fa084f52e0928cd6e03e = L.circleMarker(
+                [18.509, 73.939],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_d4a1d5d07c2643016aecb2c56769005d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5fa3dd3ca5b6a13742cbda27203b10f9 = $(`<div id="html_5fa3dd3ca5b6a13742cbda27203b10f9" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 89</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Hotel</p>         <p><strong>Nighttime Luminosity:</strong> 43.69</p><p><strong>Cluster:</strong> 2</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_d4a1d5d07c2643016aecb2c56769005d.setContent(html_5fa3dd3ca5b6a13742cbda27203b10f9);
+            
+        
+
+        circle_marker_3d7b206fbed2fa084f52e0928cd6e03e.bindPopup(popup_d4a1d5d07c2643016aecb2c56769005d)
+        ;
+
+        
+    
+    
+            var circle_marker_02c8ac8bb3947175ed4df4f273083d31 = L.circleMarker(
+                [18.51, 73.94],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_5f4e53a1f9eb1def551b6d8de02508ac = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_482691e7a882cc40a375abcd60e36155 = $(`<div id="html_482691e7a882cc40a375abcd60e36155" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 90</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Restaurant</p>         <p><strong>Nighttime Luminosity:</strong> 41.54</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_5f4e53a1f9eb1def551b6d8de02508ac.setContent(html_482691e7a882cc40a375abcd60e36155);
+            
+        
+
+        circle_marker_02c8ac8bb3947175ed4df4f273083d31.bindPopup(popup_5f4e53a1f9eb1def551b6d8de02508ac)
+        ;
+
+        
+    
+    
+            var circle_marker_2e795a9ba4160df597108b8132fcad88 = L.circleMarker(
+                [18.511, 73.941],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FF6B6B", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_2304bc0e0ac7bdbbc54d23030a871fca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c317f2888dececf1d0c802f02bc90898 = $(`<div id="html_c317f2888dececf1d0c802f02bc90898" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 91</h4>             <p><strong>Category:</strong> Commercial</p>             <p><strong>Specific Type:</strong> Shop</p>         <p><strong>Nighttime Luminosity:</strong> 38.30</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Low Light, Commercial</p></div></div>`)[0];
+                popup_2304bc0e0ac7bdbbc54d23030a871fca.setContent(html_c317f2888dececf1d0c802f02bc90898);
+            
+        
+
+        circle_marker_2e795a9ba4160df597108b8132fcad88.bindPopup(popup_2304bc0e0ac7bdbbc54d23030a871fca)
+        ;
+
+        
+    
+    
+            var circle_marker_96932bb8c273f13b4b78f2c42c046c9d = L.circleMarker(
+                [18.512, 73.942],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_946352773da02367e194c11865316b1e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_413bd7a0db76a68867e6fcf789ce8360 = $(`<div id="html_413bd7a0db76a68867e6fcf789ce8360" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 92</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Bank</p>         <p><strong>Nighttime Luminosity:</strong> 40.42</p><p><strong>Cluster:</strong> 3</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_946352773da02367e194c11865316b1e.setContent(html_413bd7a0db76a68867e6fcf789ce8360);
+            
+        
+
+        circle_marker_96932bb8c273f13b4b78f2c42c046c9d.bindPopup(popup_946352773da02367e194c11865316b1e)
+        ;
+
+        
+    
+    
+            var circle_marker_61602e9bf74f2b0239bb54b66bf166af = L.circleMarker(
+                [18.513, 73.943],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#4ECDC4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_ba4c405f8acceb360651dcf0e2bf5aa8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_95d246e6415a357765ec2dd32bc7e269 = $(`<div id="html_95d246e6415a357765ec2dd32bc7e269" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 93</h4>             <p><strong>Category:</strong> Essential Services</p>             <p><strong>Specific Type:</strong> Hospital</p>         <p><strong>Nighttime Luminosity:</strong> 34.91</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_ba4c405f8acceb360651dcf0e2bf5aa8.setContent(html_95d246e6415a357765ec2dd32bc7e269);
+            
+        
+
+        circle_marker_61602e9bf74f2b0239bb54b66bf166af.bindPopup(popup_ba4c405f8acceb360651dcf0e2bf5aa8)
+        ;
+
+        
+    
+    
+            var circle_marker_e0a4f788c79db3d4453af6d6a068abf7 = L.circleMarker(
+                [18.514, 73.944],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#45B7D1", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_4b0f9e83168f6d04d3da96fc1c0077ea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_52a39e821ffa1ba2d4da3066ade9241c = $(`<div id="html_52a39e821ffa1ba2d4da3066ade9241c" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 94</h4>             <p><strong>Category:</strong> Education</p>             <p><strong>Specific Type:</strong> School</p>         <p><strong>Nighttime Luminosity:</strong> 31.63</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_4b0f9e83168f6d04d3da96fc1c0077ea.setContent(html_52a39e821ffa1ba2d4da3066ade9241c);
+            
+        
+
+        circle_marker_e0a4f788c79db3d4453af6d6a068abf7.bindPopup(popup_4b0f9e83168f6d04d3da96fc1c0077ea)
+        ;
+
+        
+    
+    
+            var circle_marker_cc888868aec13a8b9b46cae4c1b3a332 = L.circleMarker(
+                [18.515, 73.945],
+                {"bubblingMouseEvents": true, "color": "white", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#96CEB4", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 6, "stroke": true, "weight": 1}
+            ).addTo(marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f);
+        
+    
+        var popup_4b9f2916595061f65bf29e0232cd8d85 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3ea51c0e081035eeb14bbe0e1471a403 = $(`<div id="html_3ea51c0e081035eeb14bbe0e1471a403" style="width: 100.0%; height: 100.0%;">         <div style='font-family: Arial, sans-serif;'>             <h4 style='margin: 0 0 10px 0; color: #333;'>Sample POI 95</h4>             <p><strong>Category:</strong> Recreation</p>             <p><strong>Specific Type:</strong> Park</p>         <p><strong>Nighttime Luminosity:</strong> 39.95</p><p><strong>Cluster:</strong> 0</p><p><strong>Pattern:</strong> Normal</p></div></div>`)[0];
+                popup_4b9f2916595061f65bf29e0232cd8d85.setContent(html_3ea51c0e081035eeb14bbe0e1471a403);
+            
+        
+
+        circle_marker_cc888868aec13a8b9b46cae4c1b3a332.bindPopup(popup_4b9f2916595061f65bf29e0232cd8d85)
+        ;
+
+        
+    
+    
+            marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f.addTo(map_57b554b1b41ddd235ea7e07fc3f8b94f);
+        
+    
+            var heat_map_ea78cc6f29d0768e257703380a3c223a = L.heatLayer(
+                [[18.5, 73.93, 48.37585718098675], [18.501, 73.931, 41.53661636591847], [18.502, 73.932, 40.85952669364948], [18.503, 73.933, 46.74946513413493], [18.504, 73.934, 56.32616257857221], [18.505, 73.935, 40.36149442342268], [18.506, 73.936, 44.96455352504932], [18.507, 73.937, 46.62634914928703], [18.508, 73.938, 32.31742917864581], [18.509, 73.939, 43.68998463105535], [18.51, 73.94, 41.54282726288027], [18.511, 73.941, 38.303608667118574], [18.512, 73.942, 40.42228772290832], [18.513, 73.943, 34.91246365565238], [18.514, 73.944, 31.63275422986475], [18.515, 73.945, 39.95038752834241], [18.5, 73.93, 48.37585718098675], [18.501, 73.931, 41.53661636591847], [18.502, 73.932, 40.85952669364948], [18.503, 73.933, 46.74946513413493], [18.504, 73.934, 56.32616257857221], [18.505, 73.935, 40.36149442342268], [18.506, 73.936, 44.96455352504932], [18.507, 73.937, 46.62634914928703], [18.508, 73.938, 32.31742917864581], [18.509, 73.939, 43.68998463105535], [18.51, 73.94, 41.54282726288027], [18.511, 73.941, 38.303608667118574], [18.512, 73.942, 40.42228772290832], [18.513, 73.943, 34.91246365565238], [18.514, 73.944, 31.63275422986475], [18.515, 73.945, 39.95038752834241], [18.5, 73.93, 48.37585718098675], [18.501, 73.931, 41.53661636591847], [18.502, 73.932, 40.85952669364948], [18.503, 73.933, 46.74946513413493], [18.504, 73.934, 56.32616257857221], [18.505, 73.935, 40.36149442342268], [18.506, 73.936, 44.96455352504932], [18.507, 73.937, 46.62634914928703], [18.508, 73.938, 32.31742917864581], [18.509, 73.939, 43.68998463105535], [18.51, 73.94, 41.54282726288027], [18.511, 73.941, 38.303608667118574], [18.512, 73.942, 40.42228772290832], [18.513, 73.943, 34.91246365565238], [18.514, 73.944, 31.63275422986475], [18.515, 73.945, 39.95038752834241], [18.5, 73.93, 48.37585718098675], [18.501, 73.931, 41.53661636591847], [18.502, 73.932, 40.85952669364948], [18.503, 73.933, 46.74946513413493], [18.504, 73.934, 56.32616257857221], [18.505, 73.935, 40.36149442342268], [18.506, 73.936, 44.96455352504932], [18.507, 73.937, 46.62634914928703], [18.508, 73.938, 32.31742917864581], [18.509, 73.939, 43.68998463105535], [18.51, 73.94, 41.54282726288027], [18.511, 73.941, 38.303608667118574], [18.512, 73.942, 40.42228772290832], [18.513, 73.943, 34.91246365565238], [18.514, 73.944, 31.63275422986475], [18.515, 73.945, 39.95038752834241], [18.5, 73.93, 48.37585718098675], [18.501, 73.931, 41.53661636591847], [18.502, 73.932, 40.85952669364948], [18.503, 73.933, 46.74946513413493], [18.504, 73.934, 56.32616257857221], [18.505, 73.935, 40.36149442342268], [18.506, 73.936, 44.96455352504932], [18.507, 73.937, 46.62634914928703], [18.508, 73.938, 32.31742917864581], [18.509, 73.939, 43.68998463105535], [18.51, 73.94, 41.54282726288027], [18.511, 73.941, 38.303608667118574], [18.512, 73.942, 40.42228772290832], [18.513, 73.943, 34.91246365565238], [18.514, 73.944, 31.63275422986475], [18.515, 73.945, 39.95038752834241]],
+                {
+  "minOpacity": 0.2,
+  "maxZoom": 18,
+  "radius": 20,
+  "blur": 15,
+  "gradient": {
+  0.4: "blue",
+  0.6: "cyan",
+  0.7: "lime",
+  0.8: "yellow",
+  1.0: "red",
+},
+}
+            );
+        
+    
+            heat_map_ea78cc6f29d0768e257703380a3c223a.addTo(map_57b554b1b41ddd235ea7e07fc3f8b94f);
+        
+    
+            var layer_control_786fd846bf298567d6e9a6a7d1f65a65_layers = {
+                base_layers : {
+                    "OpenStreetMap" : tile_layer_166249e9bbf6180080d923b0c5bc48b4,
+                    "Satellite" : tile_layer_62dea46f0690dbfa58c54a7b1674a3fc,
+                },
+                overlays :  {
+                    "POI Markers" : marker_cluster_f0dc37c06f1ea99cfbc4dc95ae53a00f,
+                    "Luminosity Heatmap" : heat_map_ea78cc6f29d0768e257703380a3c223a,
+                },
+            };
+            let layer_control_786fd846bf298567d6e9a6a7d1f65a65 = L.control.layers(
+                layer_control_786fd846bf298567d6e9a6a7d1f65a65_layers.base_layers,
+                layer_control_786fd846bf298567d6e9a6a7d1f65a65_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_57b554b1b41ddd235ea7e07fc3f8b94f);
+
+        
+</script>
+</html>
